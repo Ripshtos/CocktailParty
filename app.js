@@ -1,11 +1,26 @@
 const express = require("express");
 const { default: mongoose } = require("mongoose");
+
 const Product = require("./models/product");
+const User = require("./models/users");
+
 const app = express();
 
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-const product = require("./models/product");
+//set view engine to ejs
+
+var bodyParser = require('body-parser');
+app.set('view engine', 'ejs');
+
+//set upp public directory to serve static files
+app.use(express.static('public'));
+
+//Initiate bodyParser to parse request body
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+
 
 mongoose
   .connect("mongodb://0.0.0.0:27017/CocktailParty", { useNewUrlParser: true })
@@ -16,12 +31,14 @@ mongoose
     console.log("no connection start");
   });
 
+
+
 app.get("/products/new", async (req, res) => {
   res.render("products/new");
 });
 
 app.get("/", async (req, res) => {
-  res.render("products/new");
+  res.render("products/index");
 });
 
 app.post("/products/r", async (req, res) => {
@@ -29,6 +46,21 @@ app.post("/products/r", async (req, res) => {
   await newProduct.save();
   res.redirect(`/product/${newProduct._id}`);
 });
+
+app.post("/users/r", async (req, res) => {
+  const newUser = new User(req.body);
+  await newUser.save();
+ 
+});
+
+
+
+
+
+app.get("/users/registration", async (req, res) => {
+  res.render("users/registration");
+});
+
 
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
@@ -41,6 +73,7 @@ app.get("/product/:id", async (req, res) => {
   const product = await Product.findById(id);
   res.render("products/show", { product });
 });
+
 
 app.listen(3000, () => {
   console.log("listening on port 3000!");
