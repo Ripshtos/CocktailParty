@@ -1,6 +1,8 @@
 const express = require("express");
 const { default: mongoose } = require("mongoose");
 
+
+
 const Product = require("./models/product");
 const User = require("./models/users");
 
@@ -8,29 +10,47 @@ const app = express();
 
 //set view engine to ejs
 
-var bodyParser = require('body-parser');
-app.set('view engine', 'ejs');
+var bodyParser = require("body-parser");
+app.set("view engine", "ejs");
 
 //set upp public directory to serve static files
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 //Initiate bodyParser to parse request body
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 app.use(bodyParser.json());
 
-
+/*
 mongoose
-  .connect("mongodb://0.0.0.0:27017/CocktailParty", { useNewUrlParser: true })
+  .connect("mongodb+srv://<ohadrip@gmail.com>:<+Pu7i98#G4QjN3*>@cocktailparty.noij63l.mongodb.net/CocktailParty?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
     console.log("mongo connection open!!");
   })
   .catch((err) => {
     console.log("no connection start");
   });
+*/
 
+// Encode the special characters in the username and password
+const username = encodeURIComponent('cocktail');
+const password = encodeURIComponent('1234');
+const database = 'CocktailParty'; // Replace with your desired database name
+
+const uri = `mongodb+srv://${username}:${password}@cocktailparty.noij63l.mongodb.net/${database}?retryWrites=true&w=majority`;
+
+mongoose
+  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("MongoDB connection open!!");
+  })
+  .catch((err) => {
+    console.log("Error connecting to MongoDB:", err);
+  });
 
 
 app.get("/products/new", async (req, res) => {
@@ -50,17 +70,11 @@ app.post("/products/r", async (req, res) => {
 app.post("/users/r", async (req, res) => {
   const newUser = new User(req.body);
   await newUser.save();
- 
 });
-
-
-
-
 
 app.get("/users/registration", async (req, res) => {
   res.render("users/registration");
 });
-
 
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
@@ -73,7 +87,6 @@ app.get("/product/:id", async (req, res) => {
   const product = await Product.findById(id);
   res.render("products/show", { product });
 });
-
 
 app.listen(3000, () => {
   console.log("listening on port 3000!");

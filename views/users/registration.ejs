@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>add a user</h1>
     <form action="/users/r" method="POST">
-        <input type="text" name="fname" placeholder="first name">
+      <input type="text" name="fname" placeholder="first name" />
 
-        <input type="text" name="lname" placeholder="last price">
-        
-        <!-- from api -->
-        <select name="city" id="city">
-        </select>
-        
-        <input type="text" name="address" placeholder="address">
-        
-        <input type="text" name="birthday" placeholder="birthday">
-        
-        <input type="text" name="price" placeholder="product price">
-        
-        <input type="date" id="birthday" name="birthday"
-        min="2018-01-01" max="2018-12-31">
- 
-        <input type="text" id="postal" name="postal">
-        
-        <input type="text" id="email" name="email">
- 
-        <input type="date" id="birthday" name="birthday"
+      <input type="text" name="lname" placeholder="last name" />
+
+      <!-- from api -->
+      <select name="city" id="city">
+        <option value="tlv">tlv</option>
+        <option value="rishon">rishon</option>
+      </select>
+
+      <input type="text" name="address" placeholder="address" />
+
+      <input type="text" id="postal" name="postal" placeholder="postal" />
+
+      <input type="text" id="email" name="email" placeholder="email" />
+
+      <input
+        type="date"
+        id="birthday"
+        name="birthday"
         value="2018-07-22"
-        min="2018-01-01" max="2018-12-31">
- 
-        
-        <input type="text" id="phone" name="phone">
+        min="2018-01-01"
+        max="2018-12-31"
+      />
 
-        <button>submit</button>
+      <input type="text" id="phone" name="phone" placeholder="phone" />
+
+      <input type="text" id="admin" name="admin" value="0" hidden />
+
+      <button>submit</button>
     </form>
-
-</body>
-
+    <script>
+        // Fetch cities from API and populate dropdown options
+        fetch('http://api.geonames.org/searchJSON?country=IL&maxRows=500&username=ohad')
+          .then(response => response.json())
+          .then(data => {
+            const citySelect = document.getElementById('city');
+  
+            // Loop through the API results and create option elements
+            data.geonames.forEach(city => {
+              const option = document.createElement('option');
+              option.value = city.name;
+              option.textContent = city.name;
+              citySelect.appendChild(option);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching cities:', error);
+          });
+      </script>
+  </body>
 </html>
