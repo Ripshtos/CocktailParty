@@ -1,40 +1,24 @@
 const express = require("express");
 const { default: mongoose } = require("mongoose");
-
-
+var bodyParser = require("body-parser");
+const app = express();
 
 const Product = require("./models/product");
 const User = require("./models/users");
 
-const app = express();
-
 //set view engine to ejs
-
-var bodyParser = require("body-parser");
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 //set upp public directory to serve static files
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 //Initiate bodyParser to parse request body
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(bodyParser.json());
 
-/*
-mongoose
-  .connect("mongodb+srv://<ohadrip@gmail.com>:<+Pu7i98#G4QjN3*>@cocktailparty.noij63l.mongodb.net/CocktailParty?retryWrites=true&w=majority", { useNewUrlParser: true })
-  .then(() => {
-    console.log("mongo connection open!!");
-  })
-  .catch((err) => {
-    console.log("no connection start");
-  });
-*/
 
 // Encode the special characters in the username and password
 const username = encodeURIComponent('cocktail');
@@ -52,6 +36,9 @@ mongoose
     console.log("Error connecting to MongoDB:", err);
   });
 
+
+
+//routes
 
 app.get("/products/new", async (req, res) => {
   res.render("products/new");

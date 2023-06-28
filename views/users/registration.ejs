@@ -5,60 +5,106 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Include Bootstrap CSS -->
   </head>
 
   <body>
-    <h1>add a user</h1>
-    <form action="/users/r" method="POST">
-      <input type="text" name="fname" placeholder="first name" />
+    <div class="container">
+      <h1 class="display-1 text-center">New cocktail fan !</h1>
+      <form action="/users/r" method="POST">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input
+            type="text"
+            name="fname"
+            class="form-control"
+            id="fname"
+            placeholder="Enter first name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            name="lname"
+            class="form-control"
+            id="lname"
+            placeholder="Enter last name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <select name="city" id="city" class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            class="form-control"
+            id="address"
+            placeholder="Enter address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="postal">Postal</label>
+          <input
+            type="text"
+            name="postal"
+            class="form-control"
+            id="postal"
+            placeholder="Enter postal"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="birthday">Birthday</label>
+          <input
+            type="date"
+            name="birthday"
+            class="form-control"
+            id="birthday"
+            value="2018-07-22"
+            min="2018-01-01"
+            max="2018-12-31"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            name="phone"
+            class="form-control"
+            id="phone"
+            placeholder="Enter phone"
+          />
+        </div>
+        <input type="text" id="admin" name="admin" value="0" hidden />
+        <div class="text-center">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.container -->
 
-      <input type="text" name="lname" placeholder="last name" />
-
-      <!-- from api -->
-      <select name="city" id="city">
-        <option value="tlv">tlv</option>
-        <option value="rishon">rishon</option>
-      </select>
-
-      <input type="text" name="address" placeholder="address" />
-
-      <input type="text" id="postal" name="postal" placeholder="postal" />
-
-      <input type="text" id="email" name="email" placeholder="email" />
-
-      <input
-        type="date"
-        id="birthday"
-        name="birthday"
-        value="2018-07-22"
-        min="2018-01-01"
-        max="2018-12-31"
-      />
-
-      <input type="text" id="phone" name="phone" placeholder="phone" />
-
-      <input type="text" id="admin" name="admin" value="0" hidden />
-
-      <button>submit</button>
-    </form>
-    <script>
-        // Fetch cities from API and populate dropdown options
-        fetch('http://api.geonames.org/searchJSON?country=IL&maxRows=500&username=ohad')
-          .then(response => response.json())
-          .then(data => {
-            const citySelect = document.getElementById('city');
-  
-            // Loop through the API results and create option elements
-            data.geonames.forEach(city => {
-              const option = document.createElement('option');
-              option.value = city.name;
-              option.textContent = city.name;
-              citySelect.appendChild(option);
-            });
-          })
-          .catch(error => {
-            console.error('Error fetching cities:', error);
-          });
-      </script>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="../js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/townapi.js"></script>
   </body>
 </html>
