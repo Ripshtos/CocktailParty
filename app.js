@@ -1,3 +1,4 @@
+// project settings
 const express = require("express");
 const { default: mongoose } = require("mongoose");
 
@@ -11,6 +12,7 @@ const User = require("./models/users");
 
 var bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
+
 //set view engine to ejs
 app.set('view engine', 'ejs');
 app.use(cookieParser()); // initializing the lib
@@ -20,8 +22,6 @@ app.use(express.static('public'));
 // sessionID -> username
 const SESSIONS = {}
 
-
-//Initiate bodyParser to parse request body
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -29,7 +29,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-// Encode the special characters in the username and password
+// connection to mongo 
+
 const username = encodeURIComponent('cocktail');
 const password = encodeURIComponent('1234');
 const database = 'CocktailParty'; // Replace with your desired database name
@@ -108,8 +109,7 @@ app.get("/product/:id", async (req, res) => {
   res.render("products/show", { product });
 });
 
-
-// routing for the login page
+//login page
 app.post('/login', async (req, res) => {
   const useremail = req.body.username;
   const password = req.body.password;
@@ -151,7 +151,7 @@ app.get('/users/logout', (req, res) => {
 })
 
 
-
+//setup server
 app.listen(3000, () => {
   console.log("listening on port 3000!");
 });
