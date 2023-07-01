@@ -23,7 +23,7 @@ app.use(express.static('public'));
 const SESSIONS = {}
 
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
 app.use(bodyParser.json());
@@ -50,52 +50,22 @@ mongoose
 
 //routes
 
-app.get("/products/new", async (req, res) => {
-  res.render("products/new");
-});
-
 app.get("/", async (req, res) => {
   const sessionId = req.cookies.sessionId;
   const username = SESSIONS[sessionId];
   const isLoggedIn = !!username; // Check if the username exists in SESSIONS
-  
-  res.render("products/index.ejs", { isLoggedIn });
-});
 
-app.post("/products/r", async (req, res) => {
-  const newProduct = new Product(req.body);
-  await newProduct.save();
-  res.redirect(`/product/${newProduct._id}`);
-});
+  const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
 
-app.post("/users/r", async (req, res) => {
-  const useremail = req.body.email;
 
-  const user = await User.findOne({ email: useremail }); // Find a single user with the provided email
- 
-  if (user) {
-    // If user with the email already exists, display an alert
-    res.send('<script>alert("User email already taken"); window.location.href = "/users/registration";</script>');
-    
-  }
-  else
-  {
-    const newUser = new User(req.body);
-    await newUser.save();
-    res.send('<script>alert("Created new user");</script>');
-    res.redirect('/');
-  }
+  console.log(admin);
+
+  res.render("products/index.ejs", { isLoggedIn , admin});
 
 });
 
-app.get("/users/registration", async (req, res) => {
-  res.render("users/registration");
-});
 
-app.get("/users/login", async (req, res) => {
-  res.render("users/login");
-});
-
+//products
 
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
@@ -109,29 +79,87 @@ app.get("/product/:id", async (req, res) => {
   res.render("products/show", { product });
 });
 
-//login page
+
+app.post("/products/r", async (req, res) => {
+  const newProduct = new Product(req.body);
+  await newProduct.save();
+  res.redirect(`/product/${newProduct._id}`);
+});
+
+
+//users 
+
+app.post("/users/r", async (req, res) => { // create a new user
+  const useremail = req.body.email;
+
+  const user = await User.findOne({ email: useremail }); // Find a single user with the provided email
+
+  if (user) {
+    // If user with the email already exists, display an alert
+    return res.send('<script>alert("User email already taken"); window.location.href = "/users/registration";</script>');
+  } 
+  else
+  {
+    const newUser = new User(req.body);
+    newUser.admin = 0;
+
+    try {
+      await newUser.save();
+      res.send('<script>alert("Created new user"); window.location.href = "/";</script>');
+    } catch (error) {
+      // Handle any error that occurs during user creation or saving
+      console.error(error);
+      res.status(500).send('<script>alert("Error creating user"); window.location.href = "/users/registration";</script>');
+    }
+  }
+
+});
+
+app.get("/users/registration", async (req, res) => {
+  res.render("users/registration");
+});
+
+
+app.get("/users/login", async (req, res) => {
+  res.render("users/login");
+});
+
+
+//admin routing 
+app.get("/admin/hub", async (req, res) => {
+  res.render("admin/hub");
+});
+
+app.get("/admin/add-product", async (req, res) => {
+  res.render("products/new");
+});
+
+
+
+
+
+//login and logout page
 app.post('/login', async (req, res) => {
   const useremail = req.body.username;
   const password = req.body.password;
 
   const user = await User.findOne({ email: useremail }); // Find a single user with the provided email
- 
+
   console.log(user);
 
   if (user && user.password === password) {
     // Check if a user was found and the passwords match
+
     res.cookie('sessionId', nextSessionId);
     SESSIONS[nextSessionId] = useremail;
     nextSessionId++;
 
-    app._router.stack.forEach(function(r){
-      if (r.route && r.route.path){
-        console.log(r.route.path)
-      }
-    })
+    if (user.admin == 1) {
+      res.cookie('adminMode', 1);
+    }
 
     res.redirect('/');
-  
+
   }
 
   else {
@@ -147,6 +175,7 @@ app.get('/users/logout', (req, res) => {
   delete SESSIONS[sessionId];
   // clearing the stored cookies sessionId
   res.clearCookie('sessionId');
+  res.clearCookie('adminMode');
   res.redirect('/');
 })
 
@@ -155,3 +184,12 @@ app.get('/users/logout', (req, res) => {
 app.listen(3000, () => {
   console.log("listening on port 3000!");
 });
+
+
+
+
+    // app._router.stack.forEach(function(r){
+    //   if (r.route && r.route.path){
+    //     console.log(r.route.path)
+    //   }
+    // })
