@@ -60,7 +60,7 @@ app.get("/", async (req, res) => {
 
   console.log(admin);
 
-  res.render("products/index.ejs", { isLoggedIn , admin});
+  res.render("products/index", { isLoggedIn , admin});
 
 });
 
@@ -73,18 +73,59 @@ app.get("/products", async (req, res) => {
   res.render("products/index", { products });
 });
 
-app.get("/product/:id", async (req, res) => {
+app.get("/product/:id", async (req, res) => { //shows the new product after editing/adding a new product
   const { id } = req.params;
   const product = await Product.findById(id);
   res.render("products/show", { product });
 });
 
-
-app.post("/products/r", async (req, res) => {
+app.post("/products/r", async (req, res) => { // saves the new product from the admin console 
   const newProduct = new Product(req.body);
   await newProduct.save();
   res.redirect(`/product/${newProduct._id}`);
 });
+
+app.get('/products/:id/edit', async (req, res) => { // loads the product from the admin managent console
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render('products/edit', { product });
+  } catch (error) {
+    res.status(404).send('Product not found');
+  }
+});
+
+app.post('/products/:id/e', async (req, res) => { // edits a specific item chosen from the admin console
+  try {
+    const { id } = req.params;
+    const updatedProduct = req.body;
+    await Product.findByIdAndUpdate(id, updatedProduct);
+    res.redirect(`/product/${id}`);
+  } catch (error) {
+    res.status(404).send('Product not found');
+  }
+});
+
+app.post('/products/:id/delete', async (req, res) => { // deletes a product from the admin console
+  try {
+    const { id } = req.params;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send('Invalid product ID');
+    }
+    
+    const deletedProduct = await Product.findByIdAndRemove(id);
+    
+    if (!deletedProduct) {
+      return res.status(404).send('Product not found');
+    }
+    
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error deleting product');
+  }
+});
+
 
 
 //users 
@@ -126,6 +167,7 @@ app.get("/users/login", async (req, res) => {
 
 
 //admin routing 
+
 app.get("/admin/hub", async (req, res) => {
   res.render("admin/hub");
 });
@@ -133,8 +175,11 @@ app.get("/admin/hub", async (req, res) => {
 app.get("/admin/add-product", async (req, res) => {
   res.render("products/new");
 });
-
-
+ 
+app.get("/admin/update-product", async (req, res) => {
+  const products = await Product.find({});
+  res.render("products/ProductManagment", { products });
+});
 
 
 

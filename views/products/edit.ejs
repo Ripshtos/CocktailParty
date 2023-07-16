@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Product</title>
+   <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+  <h1>Edit Product</h1>
+
+  <form method="POST" action="/products/<%= product._id %>/e">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" id="name" name="name" value="<%= product.name %>" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price:</label>
+      <input type="number" id="price" name="price" value="<%= product.price %>" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" name="description" class="form-control" required><%= product.description %></textarea>
+    </div>
+    <div class="mb-3 mt-3">
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+
+  <a href="/">Back</a>
+
+<!-- jQuery Version 1.11.1 -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

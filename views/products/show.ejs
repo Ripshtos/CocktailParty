@@ -8,15 +8,23 @@
     <title>
         <%= product.name %>
     </title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>
-        <%=product.name %>
-    </h1>
-    <h3>
-        price: <%= product.price %>
-    </h3>
+    <div class="container">
+        <h1><%= product.name %></h1>
+        <h3>Price: $<%= product.price %></h3>
+
+        <a href="/" class="btn btn-primary">Back</a>
+    </div>
+    
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>

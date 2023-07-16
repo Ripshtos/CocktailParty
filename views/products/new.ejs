@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add a Product</title>
 
     <!-- Bootstrap CSS -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+   <!-- Bootstrap Core CSS -->
+   <link href="/css/bootstrap.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -16,32 +18,32 @@
     <form action="/products/r" method="POST" class="container">
         <div class="mb-3">
             <label for="name" class="form-label">Product Name:</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Product Name">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Product Name" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description:</label>
-            <input type="text" name="description" id="description" class="form-control" placeholder="Description">
+            <input type="text" name="description" id="description" class="form-control" placeholder="Description" required>
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Product Price:</label>
-            <input type="number" name="price" id="price" class="form-control" placeholder="Product Price">
+            <input type="number" name="price" id="price" class="form-control" placeholder="Product Price" required>
         </div>
         <div class="mb-3">
             <label for="alcoholP" class="form-label">Alcohol Percentage:</label>
-            <input type="number" name="alcoholP" id="alcoholP" class="form-control" placeholder="Alcohol Percentage">
+            <input type="number" name="alcoholP" id="alcoholP" class="form-control" placeholder="Alcohol Percentage" required>
         </div>
         <div class="mb-3">
             <label for="picture" class="form-label">Picture:</label>
-            <input type="text" name="picture" id="picture" class="form-control" placeholder="Picture">
+            <input type="text" name="picture" id="picture" class="form-control" placeholder="Picture" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <!-- jQuery Version 1.11.1 -->
-    <script src="../js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
