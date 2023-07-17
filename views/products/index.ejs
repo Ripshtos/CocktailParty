@@ -13,7 +13,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <style>
     body {
@@ -22,11 +21,10 @@
     }
     </style>
 </head>
-
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top d-flex justify-content-center">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -49,18 +47,12 @@
                     <li>
                         <a href="/users/login">התחבר</a>
                     </li>
-
                     <% } %>
                     <% if (admin) { %>
-                        <li>
-                            <a href="/admin/hub">ניהול אתר</a>
-                        </li>
-
+                    <li>
+                        <a href="/admin/hub">ניהול אתר</a>
+                    </li>
                     <% } %>
-
-
-
-
                     <li>
                         <a href="/users/registration">הרשם לאתר</a>
                     </li>
@@ -70,31 +62,260 @@
         </div>
         <!-- /.container -->
     </nav>
+    
 
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!!</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.7</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
+        <div class="row d-flex justify-content-center">
+            <div class="mx-auto text-center">
+                <div class="box card">
+                    <div class="info text-center">
+                        <h3>איך מכינים קוקטיילים?</h3>
+                    </div>
+                    <div class="box cardImg">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/c6GV_vRlIIA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- /.row -->
-
+    </div>   
+    <!--Products scheme-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/cap-maquette_1310-498.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">קנה עכשיו</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/casquette-realiste-se-moque_1310-152.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/casquette-noire-pour-maquette_34168-863.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/modele-maquette-casquette-baseball-blanc_34168-952.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/photos-gratuite/vetements-protection-fond-capuchon-rouge_1203-6403.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/sweat-capuche-psd_25226-57.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/sweat-capuche-noir-isole-maquette-vue-face_110893-2080.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/t-shirts-noirs-maquettes-devant-dos-utilises-comme-modele-conception_34168-864.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/cap-maquette_1310-498.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/casquette-realiste-se-moque_1310-152.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/casquette-noire-pour-maquette_34168-863.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/modele-maquette-casquette-baseball-blanc_34168-952.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/photos-gratuite/vetements-protection-fond-capuchon-rouge_1203-6403.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/sweat-capuche-psd_25226-57.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="https://image.freepik.com/psd-gratuit/sweat-capuche-noir-isole-maquette-vue-face_110893-2080.jpg" alt="..." style="max-width: 100%;">
+                    </div>
+                    <div class="info">
+                        <h3>Name</h3>
+                        <p><span>150</span> DH</p>
+                        <button class="btn btn-primary">Acheter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+      <!--End of Products scheme-->
     <!-- /.container -->
+    <div class="container">
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="/js/jquery.js"></script>
+        <h3 class="text-center">Contact us</h3><br />
+        
+        <div class="row">
+          <div class="col-md-8">
+              <form action="/post" method="post">
+                <input class="form-control" name="name" placeholder="Name..." /><br />
+                <input class="form-control" name="phone" placeholder="Phone..." /><br />
+                <input class="form-control" name="email" placeholder="E-mail..." /><br />
+                <textarea class="form-control" name="text" placeholder="How can we help you?" style="height:150px;"></textarea><br />
+                <input class="btn btn-primary" type="submit" value="Send" /><br /><br />
+              </form>
+          </div>
+          <div class="col-md-4">
+            <b>שירות לקוחות</b> <br />
+            מספר טלפון: 03-22244444<br />
+            E-mail: <a href="cocktails@support.org">cocktails@support.org</a><br />
+            <br /><br />
+            <b>צוות</b><br />
+            Company Inc, <br />
+            Las vegas street 201<br />
+            55001 Nevada, USA<br />
+            Phone: +1 145 000 101<br />
+            <a href="cocktails@company.org">cocktails@company.org</a><br />
+        
+        
+            <br />כתובת<br />
+            <b>ראשון לציון:</b><br />
+            המכללה למנהל, <br />
+            25/F.168 Queen<br />
+            Wan Chai District, Hong Kong<br />
+            Phone: +852 129 209 291<br />
+            <a href="cocktails@company.org">cocktails@company.org</a><br />
+        
+        
+          </div>
+        </div>
+        
+        </div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core CSS -->
+<link href="/css/bootstrap.css" rel="stylesheet">
 
+<!-- jQuery Version 1.11.1 -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
