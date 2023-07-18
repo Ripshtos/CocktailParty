@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>מסמך</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet" />
@@ -14,69 +14,69 @@
 
   <body>
     <div class="container">
-      <h1 class="display-1 text-center">New cocktail fan !</h1>
+      <h1 class="display-1 text-center">מעריץ קוקטיילים חדש!</h1>
       <form action="/users/r" method="POST">
-        <div class="form-group">
-          <label for="fname">First Name</label>
+        <div class="form-group text-right">
+          <label for="fname">שם פרטי</label>
           <input
             type="text"
             name="fname"
             class="form-control"
             id="fname"
-            placeholder="Enter first name"
+            placeholder="הכנס שם פרטי"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="lname">Last Name</label>
+        <div class="form-group text-right">
+          <label for="lname">שם משפחה</label>
           <input
             type="text"
             name="lname"
             class="form-control"
             id="lname"
-            placeholder="Enter last name"
+            placeholder="הכנס שם משפחה"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="city">City</label>
-          <select name="city" id="city" class="form-control" required ></select>
+        <div class="form-group text-right">
+          <label for="city">עיר</label>
+          <select name="city" id="city" class="form-control" required></select>
         </div>
-        <div class="form-group">
-          <label for="address">Address</label>
+        <div class="form-group text-right">
+          <label for="address">כתובת</label>
           <input
             type="text"
             name="address"
             class="form-control"
             id="address"
-            placeholder="Enter address"
+            placeholder="הכנס כתובת"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="postal">Postal</label>
+        <div class="form-group text-right">
+          <label for="postal">מיקוד</label>
           <input
             type="text"
             name="postal"
             class="form-control"
             id="postal"
-            placeholder="Enter postal"
+            placeholder="הכנס מיקוד"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="form-group text-right">
+          <label for="email">אימייל</label>
           <input
             type="text"
             name="email"
             class="form-control"
             id="email"
-            placeholder="Enter email"
+            placeholder="הכנס אימייל"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="birthday">Birthday</label>
+        <div class="form-group text-right">
+          <label for="birthday">תאריך לידה</label>
           <input
             type="date"
             name="birthday"
@@ -88,32 +88,32 @@
             required
           />
         </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
+        <div class="form-group text-right">
+          <label for="phone">טלפון</label>
           <input
             type="text"
             name="phone"
             class="form-control"
             id="phone"
-            placeholder="Enter phone"
+            placeholder="הכנס טלפון"
             required
           />
         </div>
 
-        <div class="form-group">
-          <label for="Password">Password</label>
+        <div class="form-group text-right">
+          <label for="password">סיסמה</label>
           <input
-            type="text"
+            type="password"
             name="password"
             class="form-control"
-            id="passsword"
-            placeholder="Enter password"
+            id="password"
+            placeholder="הכנס סיסמה"
             required
           />
         </div>
         
         <div class="text-center">
-          <button class="btn btn-primary">Submit</button>
+          <button class="btn btn-primary">שלח</button>
         </div>
       </form>
     </div>
@@ -125,5 +125,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/townapi.js"></script>
+    <script src="../js/regex.js"></script>
   </body>
 </html>
