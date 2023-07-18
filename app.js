@@ -8,6 +8,7 @@ const app = express();
 
 const Product = require("./models/product");
 const User = require("./models/users");
+const Cart = require("./models/cart");
 
 
 var bodyParser = require("body-parser");
@@ -18,6 +19,12 @@ app.set('view engine', 'ejs');
 app.use(cookieParser()); // initializing the lib
 //set upp public directory to serve static files
 app.use(express.static('public'));
+
+app.use((req, res, next) => {
+  res.setHeader('Permissions-Policy', 'ch-ua-form-factor=();');
+  next();
+});
+
 
 // sessionID -> username
 const SESSIONS = {}
@@ -57,10 +64,9 @@ app.get("/", async (req, res) => {
 
   const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
 
+  const products = await Product.find({});
 
-  console.log(admin);
-
-  res.render("products/index", { isLoggedIn , admin});
+  res.render("products/index", { isLoggedIn , admin , products});
 
 });
 
@@ -165,6 +171,60 @@ app.get("/users/login", async (req, res) => {
   res.render("users/login");
 });
 
+//cart
+
+app.post("/cart", async (req, res) => {
+
+  const productId = req.body.productId;
+  const quantity = req.body.quantity;
+  const userId = req.cookies.userEmail;
+
+    // Validate the inputs
+
+    // Check if the product exists
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    // Create a new cart item
+    const cartItem = new Cart({
+      productId,
+      quantity,
+      userId
+    });
+
+    // Save the cart item to the database
+    await cartItem.save();
+    
+});
+
+
+app.get("/cart", async (req, res) => {
+  
+  const userEmail = req.cookies.userEmail;
+  const cartItems = await Cart.find({ userId: userEmail }).populate('productId');
+  res.render("products/cart", { cartItems });
+   
+});
+
+// cart
+
+// Remove item from cart
+app.get("/cart/remove/:id", async (req, res) => {
+  const cartItemId = req.params.id;
+
+    const removedCartItem = await Cart.findByIdAndRemove(cartItemId);
+
+    if (!removedCartItem) {
+      return res.status(404).send("Cart item not found");
+    }
+
+    res.redirect("/cart");
+});
+
+
+
 
 //admin routing 
 
@@ -203,6 +263,7 @@ app.post('/login', async (req, res) => {
       res.cookie('adminMode', 1);
     }
 
+    res.cookie('userEmail' , user.email );
     res.redirect('/');
 
   }
@@ -221,6 +282,7 @@ app.get('/users/logout', (req, res) => {
   // clearing the stored cookies sessionId
   res.clearCookie('sessionId');
   res.clearCookie('adminMode');
+  res.clearCookie('userEmail');
   res.redirect('/');
 })
 

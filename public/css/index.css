@@ -1,0 +1,19 @@
+.custom-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.card-image
+{
+  max-width: 90%;
+}
+.custom-nav li {
+  margin-right: 10px;
+}
+
+.custom-nav li:last-child {
+  margin-right: 0;
+}

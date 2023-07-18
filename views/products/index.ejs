@@ -1,326 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title  >Bare - Start Bootstrap Template</title>
+    <title>Bare - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <style>
-    body {
+      body {
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top d-flex justify-content-center">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <% if (isLoggedIn) { %>
-                    <li>
-                        <a href="/users/logout">התנתק</a>
-                    </li>
-                    <% } else { %>
-                    <li>
-                        <a href="/users/login">התחבר</a>
-                    </li>
-                    <% } %>
-                    <% if (admin) { %>
-                    <li>
-                        <a href="/admin/hub">ניהול אתר</a>
-                    </li>
-                    <% } %>
-                    <li>
-                        <a href="/users/registration">הרשם לאתר</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+          >
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Start Bootstrap</a>
         </div>
-        <!-- /.container -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse custom-center" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav custom-nav  ">
+            <% if (isLoggedIn) { %>
+            <li>
+              <a href="/users/logout">התנתק</a>
+            </li>
+            <% } else { %>
+            <li>
+              <a href="/users/login">התחבר</a>
+            </li>
+            <% } %> <% if (admin && isLoggedIn) { %>
+            <li>
+              <a href="/admin/hub">ניהול אתר</a>
+            </li>
+            <% } %>
+            <li>
+              <a href="/users/registration">הרשם לאתר</a>
+            </li>
+            <% if (isLoggedIn) {%>
+            <li>
+              <a type="button" class="btn btn-outline-secondary" href="cart">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-cart"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+            <%}%>
+          </ul>
+        </div>
+
+        <!-- /.navbar-collapse -->
+      </div>
     </nav>
-    
 
     <!-- Page Content -->
     <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="mx-auto text-center">
-                <div class="box card">
-                    <div class="info text-center">
-                        <h3>איך מכינים קוקטיילים?</h3>
-                    </div>
-                    <div class="box cardImg">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/c6GV_vRlIIA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                </div>
+      <div class="row d-flex justify-content-center">
+        <div class="mx-auto text-center">
+          <div class="box card">
+            <div class="info text-center">
+              <h3>איך מכינים קוקטיילים?</h3>
             </div>
+            <div class="box cardImg">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/c6GV_vRlIIA"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
         </div>
-    </div>   
+      </div>
+    </div>
     <!--Products scheme-->
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/10__2_-removebg-preview.png?v=1687086878&width=850" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">קנה עכשיו</button>
-                    </div>
+          <div class="col-12">
+            <h1 class="text-center">הקוקטיילים שלנו</h1>
+            <div class="row">
+              <% products.forEach((product) => { %>
+              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4">
+                <div class="card">
+                  <div class="cardImg">
+                    <img src="<%= product.picture %>" alt="Product Image" class="img-fluid card-image" />
+                  </div>
+                  <div class="card-body text-center">
+                    <h3 class="card-title"><%= product.name %></h3>
+                    <p class="card-text mb-3"><span><%= product.price %></span> שקל</p>
+                    <form action="/cart" method="POST">
+                      <div class="form-group row">
+                        <label for="quantity" class="col-md-6 col-form-label">Quantity:</label>
+                        <div class="col-md-6">
+                          <input type="number" id="quantity" name="quantity" value="1" class="form-control">
+                        </div>
+                      </div>
+                      <input type="hidden" name="productId" value="<%= product._id %>">
+                      <button type="submit" class="btn btn-primary">הוסף לעגלה</button>
+                    </form>
+                  </div>
                 </div>
+              </div>
+              <% }); %>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/14_Debi_jan_31.jpg?v=1686046998&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/19_bottle_3cda3c07-ce78-48a6-ad3f-74adc95778e4.jpg?v=1686475287&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/14_b6640055-b451-4536-83af-577ca15cfd0d.jpg?v=1686474977&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/21_395bf0e6-4700-4385-9124-8424b13585a3.jpg?v=1689344399&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/6f2b4c668536801c5d5abc35d41f0279.jpg?v=1688458218&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/12_bottle_ver_4_e3b90131-6b6d-4fcc-abcd-a1b4a21ab7c1.jpg?v=1689344347&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/18808612d5e1a73cc6b44e06d0fee0e9.jpg?v=1687444219&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/01264b2ea9670860ab74ea3c340502ea.jpg?v=1687444160&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/removebg-preview_9f4528e3-fbe7-4bf8-8ed1-092aaf62b03c.png?v=1672848059&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/products/17_bottle_2c6487c7-020b-4d2a-951b-8a27fee70f0a.jpg?v=1686474876&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/2_77269b1d-7f8c-4d4c-8e9c-e02cfc56fe25.jpg?v=1687444104&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/2023-06-19153119.png?v=1687182568&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="box card">
-                    <div class="box cardImg">
-                        <img src="https://cdn.shopify.com/s/files/1/0661/0655/6667/files/5_f256e1c3-56ed-4a95-a7f7-0e99470ee881.jpg?v=1687442340&width=800" alt="..." style="max-width: 100%;">
-                    </div>
-                    <div class="info">
-                        <h3>Name</h3>
-                        <p><span>150</span> DH</p>
-                        <button class="btn btn-primary">Acheter</button>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-   </div>
-</div>
-<div class="SectionFooter">
-    <a href="/עגלה" class="Button Button--primary">לעגלה</a>
-  </div>
-      <!--End of Products scheme-->
+      </div>
+      
+      <br>
+    <!--End of Products scheme-->
     <!-- /.container -->
     <section id="contact">
-        <div class="container">
-          <div class="well well-sm mx-auto text-center">
-            <h3><strong>צור קשר</strong></h3>
+      <div class="container mt-3">
+        <div class="well well-sm mx-auto text-center">
+          <h3><strong>צור קשר</strong></h3>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1231.729726282314!2d34.771682610854675!3d31.96960451043026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b30236ef5d51%3A0x6c10ba446a77cd0c!2z15TXnteb15zXnNeUINec157XoNeU15wg16jXkNep15XXnyDXnNem15nXldef!5e0!3m2!1siw!2sil!4v1689554367290!5m2!1siw!2sil"
+              width="100%"
+              height="315"
+              frameborder="0"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-      
-          <div class="row">
-            <div class="col-md-7">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1231.729726282314!2d34.771682610854675!3d31.96960451043026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b30236ef5d51%3A0x6c10ba446a77cd0c!2z15TXnteb15zXnNeUINec157XoNeU15wg16jXkNep15XXnyDXnNem15nXldef!5e0!3m2!1siw!2sil!4v1689554367290!5m2!1siw!2sil" width="100%" height="315" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-      
-            <div class="col-md-5 text-right">
-                <h4><strong>מלא פרטי איש קשר</strong></h4>
-              <form>
-                <div class="form-group">
-                  <input type="text" class="form-control text-right" name="" value="" placeholder="שם">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control text-right" name="" value="" placeholder="מייל">
-                </div>
-                <div class="form-group">
-                  <input type="tel" class="form-control text-right" name="" value="" placeholder="מספר טלפון">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control text-right" name="" rows="3" placeholder="תוכן הפנייה"></textarea>
-                </div>
-                <button class="btn btn-default" type="submit" name="button">
-                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
-                </button>
-              </form>
-            </div>
+
+          <div class="col-md-5 text-right">
+            <h4><strong>מלא פרטי איש קשר</strong></h4>
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control text-right"
+                  name=""
+                  value=""
+                  placeholder="שם"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control text-right"
+                  name=""
+                  value=""
+                  placeholder="מייל"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="tel"
+                  class="form-control text-right"
+                  name=""
+                  value=""
+                  placeholder="מספר טלפון"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-control text-right"
+                  name=""
+                  rows="3"
+                  placeholder="תוכן הפנייה"
+                ></textarea>
+              </div>
+              <button class="btn btn-default" type="submit" name="button">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
+              </button>
+            </form>
           </div>
         </div>
-      </section>
-      <footer>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12 text-right">
-              <p>&copy; כל הזכויות שמורות לנדב סשה אוהד מתן ועמיתי.</p>
-            </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <p>&copy; כל הזכויות שמורות לנדב סשה אוהד מתן ועמיתי.</p>
           </div>
         </div>
-      </footer>
- <!-- Google Maps JavaScript embed API -->
+      </div>
+    </footer>
+    <!-- Google Maps JavaScript embed API -->
 
-<script>
-  function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 31.969768463561106, lng: 34.771018868653016 }, // Replace with the desired coordinates
-      zoom: 15 // Adjust the zoom level as needed
-    });
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 31.969768463561106, lng: 34.771018868653016 }, // Replace with the desired coordinates
+          zoom: 15, // Adjust the zoom level as needed
+        });
+      }
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+      async
+      defer
+    ></script>
 
-<!-- Bootstrap Core CSS -->
-<link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet" />
 
-<!-- jQuery Version 1.11.1 -->
-<script src="/js/jquery.js"></script>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-</body>
-
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
 </html>
