@@ -9,6 +9,7 @@ const app = express();
 const Product = require("./models/product");
 const User = require("./models/users");
 const Cart = require("./models/cart");
+const Order = require("./models/order");
 
 
 var bodyParser = require("body-parser");
@@ -201,14 +202,18 @@ app.post("/cart", async (req, res) => {
 
 
 app.get("/cart", async (req, res) => {
-  
   const userEmail = req.cookies.userEmail;
   const cartItems = await Cart.find({ userId: userEmail }).populate('productId');
-  res.render("products/cart", { cartItems });
-   
+
+  // Calculate the total price based on the cart items
+  let totalPrice = 0;
+  cartItems.forEach((cartItem) => {
+    totalPrice += cartItem.productId.price * cartItem.quantity;
+  });
+
+  res.render("products/cart", { cartItems, totalPrice });
 });
 
-// cart
 
 // Remove item from cart
 app.get("/cart/remove/:id", async (req, res) => {
@@ -224,6 +229,40 @@ app.get("/cart/remove/:id", async (req, res) => {
 });
 
 
+//checkout
+app.post("/checkout", async (req, res) => {
+  console.log("checkout");
+  const userEmail = req.cookies.userEmail;
+
+    // Fetch user's cart items
+    const cartItems = await Cart.find({ userId: userEmail }).populate('productId');
+
+  // Calculate the total price based on the cart items
+  let totalPrice = 0;
+  cartItems.forEach((cartItem) => {
+    totalPrice += cartItem.productId.price * cartItem.quantity;
+  });
+   
+  console.log(totalPrice);
+    // Create a new order
+    const newOrder = new Order({
+      userEmail,
+      products: cartItems.map(item => ({
+        productId: item.productId,
+        quantity: item.quantity,
+      })),
+      totalAmount: totalPrice,
+    });
+
+    // Save the order
+    await newOrder.save();
+
+    // Clear the user's cart
+    await Cart.deleteMany({ userEmail });
+
+    
+    res.redirect("/"); // Redirect to a thank you or confirmation page
+  });
 
 
 //admin routing 
@@ -233,19 +272,19 @@ app.get("/admin/hub", async (req, res) => {
 });
 
 app.get("/admin/add-product", async (req, res) => {
-  res.render("products/new");
+  res.render("admin/new");
 });
  
 app.get("/admin/update-product", async (req, res) => {
   const products = await Product.find({});
-  res.render("products/ProductManagment", { products });
+  res.render("admin/ProductManagment", { products });
 });
 
 
 
 //login and logout page
 app.post('/login', async (req, res) => {
-  const useremail = req.body.username;
+  const useremail = req.body.username.trim();
   const password = req.body.password;
 
   const user = await User.findOne({ email: useremail }); // Find a single user with the provided email
@@ -286,6 +325,25 @@ app.get('/users/logout', (req, res) => {
   res.redirect('/');
 })
 
+//orders
+app.get("/orders", async (req, res) => {
+  // Get the currently logged-in user's email from the authentication mechanism
+  const userEmail = req.cookies.userEmail; // Adjust this to match your authentication setup
+
+  try {
+    // Fetch orders for the logged-in user
+    const orders = await Order.find({ userEmail });
+    console.log(orders);
+    res.render("users/orders", { orders });
+
+
+
+    
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 //setup server
 app.listen(3000, () => {

@@ -8,7 +8,9 @@
     <link href="../../css/bootstrap.css" rel="stylesheet" />
     <link href="../../css/cart.css" rel="stylesheet" />
   </head>
+
   <body>
+
     <div class="container px-3 my-5 clearfix">
       <!-- Shopping cart table -->
       <div class="card">
@@ -92,38 +94,37 @@
           </div>
           <!-- / Shopping cart table -->
 
-          <div
-            class="d-flex flex-wrap justify-content-between align-items-center"
-          >
+          <div class="d-flex flex-wrap justify-content-between align-items-center">
             <div class="d-flex">
               <div class="text-center mt-4">
                 <label class="text-muted font-weight-normal m-0"
                   >מחיר סופי</label
                 >
                 <div class="text-large">
-                  <strong>
-                    <% let totalPrice = 0; %> <% cartItems.forEach((cartItem) =>
-                    { %> <% totalPrice += cartItem.productId.price *
-                    cartItem.quantity; %> <% }); %> <%= totalPrice.toFixed(2) %>
-                  </strong>
-                  ש"ח
+
+                  <div id ="totalPrice" value="<%= totalPrice %>" >
+                    <strong>
+                      <span><%= totalPrice.toFixed(2) %></span>
+                      ש"ח
+                    </strong>
                 </div>
+
               </div>
               <br />
             </div>
           </div>
 
-          <div class="text-center mb-3">
-            <a href="/" class="btn btn-lg btn-default mt-2">בחזרה לחנות</a>
-            <button type="button" class="btn btn-lg btn-primary mt-2">
-              קניה
-            </button>
-          
-          </div>
+          <form action="/checkout" method="POST">
+            <div class="text-center mb-3">
+              <a href="/" class="btn btn-lg btn-default mt-2">בחזרה לחנות</a>
+              <button type="submit" class="btn btn-lg btn-primary mt-2">קניה</button>
+            </div>
+          </form>
 
           <br />
         </div>
       </div>
+      
     </div>
 
     <!-- jQuery Version 1.11.1 -->

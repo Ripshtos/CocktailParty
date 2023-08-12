@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Start Bootstrap</a>
+          <a class="navbar-brand" href="#">CocktailParty</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse custom-center" id="bs-example-navbar-collapse-1">
@@ -47,6 +47,11 @@
             <li>
               <a href="/users/logout">התנתק</a>
             </li>
+
+            <li>
+              <a href="/orders">הזמנות</a>
+            </li>
+
             <% } else { %>
             <li>
               <a href="/users/login">התחבר</a>
@@ -84,7 +89,44 @@
       </div>
     </nav>
 
-    <!-- Page Content -->
+   
+    <!--Products scheme-->
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center">הקוקטיילים שלנו</h1>
+            <div class="row">
+              <% products.forEach((product) => { %>
+              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4">
+                <div class="card">
+                  <div class="cardImg">
+                    <img src="<%= product.picture %>" alt="Product Image" class="img-fluid card-image" />
+                  </div>
+                  <div class="card-body text-center">
+                    <h3 class="card-title"><%= product.name %></h3>
+                    <p class="card-text mb-3"><span><%= product.price %></span> שקל</p>
+                    <form action="/cart" method="POST">
+                      <div class="form-group row">
+                        <label for="quantity" class="col-md-6 col-form-label">Quantity:</label>
+                        <div class="col-md-6">
+                          <input type="number" id="quantity" name="quantity" value="1" class="form-control text-center">
+                        </div>
+                      </div>
+                      <input type="hidden" name="productId" value="<%= product._id %>">
+                      <button type="submit" class="btn btn-primary">הוסף לעגלה</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+
+       <!-- Page Content -->
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="mx-auto text-center">
@@ -107,41 +149,6 @@
         </div>
       </div>
     </div>
-    <!--Products scheme-->
-    <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="text-center">הקוקטיילים שלנו</h1>
-            <div class="row">
-              <% products.forEach((product) => { %>
-              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4">
-                <div class="card">
-                  <div class="cardImg">
-                    <img src="<%= product.picture %>" alt="Product Image" class="img-fluid card-image" />
-                  </div>
-                  <div class="card-body text-center">
-                    <h3 class="card-title"><%= product.name %></h3>
-                    <p class="card-text mb-3"><span><%= product.price %></span> שקל</p>
-                    <form action="/cart" method="POST">
-                      <div class="form-group row">
-                        <label for="quantity" class="col-md-6 col-form-label">Quantity:</label>
-                        <div class="col-md-6">
-                          <input type="number" id="quantity" name="quantity" value="1" class="form-control">
-                        </div>
-                      </div>
-                      <input type="hidden" name="productId" value="<%= product._id %>">
-                      <button type="submit" class="btn btn-primary">הוסף לעגלה</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <% }); %>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <br>
     <!--End of Products scheme-->
     <!-- /.container -->
     <section id="contact">
@@ -219,6 +226,7 @@
         </div>
       </div>
     </footer>
+    
     <!-- Google Maps JavaScript embed API -->
 
     <script>
