@@ -1,0 +1,129 @@
+
+
+ <!-- Bootstrap Core CSS -->
+ <link href="css/bootstrap.css" rel="stylesheet" />
+ <link href="css/index.css" rel="stylesheet" />
+ <!-- Custom CSS -->
+ <style>
+   body {
+     padding-top: 70px;
+     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+   }
+ </style>
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button
+          type="button"
+          class="navbar-toggle"
+          data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1"
+        >
+          <span class="sr-only"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">CocktailParty</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse custom-center" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav custom-nav  ">
+          <li>
+            <a href="/users/logout">התנתק</a>
+          </li>
+          <li>
+            <a href="/orders">הזמנות</a>
+          </li>
+          <li>
+            <a href="/cocktails">מתכונים</a>
+          </li> 
+          <li>
+            <a href="/">ראשי</a>
+          </li> 
+          <li>
+
+            <a type="button" class="btn btn-outline-secondary" href="cart">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                ></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- /.navbar-collapse -->
+    </div>
+  </nav>
+<div class="cocktails-container">
+  <% cocktails.forEach(cocktail => { %>
+    <div class="cocktail">
+      <img src="<%= cocktail.imageURL %>" alt="<%= cocktail.name %>">
+      <div class="cocktail-info">
+        <h3><%= cocktail.name %></h3>
+        <p><%= cocktail.instructions %></p>
+        <% cocktail.ingredients.forEach(ingredient => { %>
+          <p><%= ingredient.name %> - <%= ingredient.measure %></p>
+        <% }); %>
+      </div>
+    </div>
+  <% }); %>
+</div>
+<style>
+.cocktails-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cocktail {
+  position: relative;
+  width: 300px; 
+  height: 450px;
+  margin: 30px;
+  overflow: hidden;
+}
+
+.cocktail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.cocktail-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.cocktail:hover img {
+  transform: scale(1.1);
+}
+
+.cocktail:hover .cocktail-info {
+  opacity: 1;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

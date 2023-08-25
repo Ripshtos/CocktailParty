@@ -10,7 +10,8 @@ const Product = require("./models/product");
 const User = require("./models/users");
 const Cart = require("./models/cart");
 const Order = require("./models/order");
-
+const Cocktail = require('./models/cocktail');
+const axios = require('axios');
 
 var bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
@@ -344,6 +345,52 @@ app.get("/orders", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+app.get("/cocktails", async (req, res) => {
+  let cocktails = [];
+
+  const requests = Array.from({ length: 20 }).map(async () => {
+      const response = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+      const cocktailDetails = response.data.drinks[0];
+      
+      let ingredientsArray = [];
+      for(let i = 1; i <= 15; i++) {
+          if(cocktailDetails['strIngredient' + i] && cocktailDetails['strMeasure' + i]) {
+              ingredientsArray.push({
+                  name: cocktailDetails['strIngredient' + i],
+                  measure: cocktailDetails['strMeasure' + i]
+              });
+          }
+      }
+      
+      const newCocktail = new Cocktail({
+          name: cocktailDetails.strDrink,
+          category: cocktailDetails.strCategory,
+          alcoholic: cocktailDetails.strAlcoholic,
+          glass: cocktailDetails.strGlass,
+          instructions: cocktailDetails.strInstructions,
+          ingredients: ingredientsArray,
+          imageURL: cocktailDetails.strDrinkThumb,
+      });
+
+      try {
+          await newCocktail.save();
+          cocktails.push(newCocktail);
+      } catch (error) {
+          console.error('Failed to save cocktail:', error);
+      }
+  });
+
+  await Promise.all(requests);
+
+  res.render("cocktails/index", { cocktails: cocktails});
+});
+
+
+
+
+
+
+
 
 //setup server
 app.listen(3000, () => {
