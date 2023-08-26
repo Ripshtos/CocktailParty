@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Order Totals Chart</title>
+  <title>גרף הזמנות</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    #container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 50px; 
+    }
+    .upperP {
+      font-size: 30px; 
+    }
+    .bar {
+    fill: #6f058f; 
+  }
+  </style>
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <h1>Order Totals Chart</h1>
-  
-  <br><br>
-  
-  <p class="upperP">Total Sum of All Orders: $<%= totalOfAllSofar %>
-  </p>
-  
-  <div id="graph-bar"></div>
-  <svg id="graph" width="850" height="400">
-  
-  </svg>
-  
-
-
-<div id="graph-container" data-totalSumOfJanuary="<%= totalSumOfJanuary  %>" ,
-    data-totalSumOfFebruary="<%= totalSumOfFebruary   %>" , data-totalSumOfMarch="<%= totalSumOfMarch   %>" ,
-    data-totalSumOfApril="<%= totalSumOfApril   %>" , data-totalSumOfMay="<%= totalSumOfMay   %>" ,
-    data-totalSumOfJune="<%= totalSumOfJune   %>" , data-totalSumOfJuly="<%= totalSumOfJuly   %>" ,
-    data-totalSumOfAugust="<%= totalSumOfAugust   %>" , data-totalSumOfSeptember="<%= totalSumOfSeptember   %>" ,
-    data-totalSumOfOctober="<%= totalSumOfOctober   %>" , data-totalSumOfNovember="<%= totalSumOfNovember   %>" ,
-    data-totalSumOfDecember="<%= totalSumOfDecember   %>" ,>
-</div>
-
-
+  <div id="container">
+    <h1>גרף הזמנות</h1>
+    <p class="upperP">סכום ההזמנות הכולל הוא: ₪<%= totalOfAllSofar %></p>
+    <div id="graph-bar"></div>
+    <svg id="graph" width="850" height="400"></svg>
+    <div
+      id="graph-container"
+      data-totalSumOfJanuary="<%= totalSumOfJanuary %>"
+      data-totalSumOfFebruary="<%= totalSumOfFebruary %>"
+      data-totalSumOfMarch="<%= totalSumOfMarch %>"
+      data-totalSumOfApril="<%= totalSumOfApril %>"
+      data-totalSumOfMay="<%= totalSumOfMay %>"
+      data-totalSumOfJune="<%= totalSumOfJune %>"
+      data-totalSumOfJuly="<%= totalSumOfJuly %>"
+      data-totalSumOfAugust="<%= totalSumOfAugust %>"
+      data-totalSumOfSeptember="<%= totalSumOfSeptember %>"
+      data-totalSumOfOctober="<%= totalSumOfOctober %>"
+      data-totalSumOfNovember="<%= totalSumOfNovember %>"
+      data-totalSumOfDecember="<%= totalSumOfDecember %>"
+    ></div>
+    <br /><br />
+  </div>
 
 
 <script>
@@ -81,25 +101,25 @@
 
 
     const data = [
-        { name: 'January', value: totalSum1 },
-        { name: 'February', value: totalSum2 },
-        { name: 'March', value: totalSum3 },
-        { name: 'April', value: totalSum4 },
-        { name: 'May', value: totalSum5 },
-        { name: 'june', value: totalSum6 },
-        { name: 'July', value: totalSum7 },
-        { name: 'August', value: totalSum8 },
-        { name: 'September', value: totalSum9 },
-        { name: 'October', value: totalSum10 },
-        { name: 'November', value: totalSum11 },
-        { name: 'December', value: totalSum12 },
+        { name: 'ינואר', value: totalSum1 },
+        { name: 'פברואר', value: totalSum2 },
+        { name: 'מרץ', value: totalSum3 },
+        { name: 'אפריל', value: totalSum4 },
+        { name: 'מאי', value: totalSum5 },
+        { name: 'יוני', value: totalSum6 },
+        { name: 'יולי', value: totalSum7 },
+        { name: 'אוגוסט', value: totalSum8 },
+        { name: 'ספטמבר', value: totalSum9 },
+        { name: 'אוקטובר', value: totalSum10 },
+        { name: 'נובמבר', value: totalSum11 },
+        { name: 'דצמבר', value: totalSum12 },
 
-        { name: 'All so far', value: totalOfAll }
+        { name: 'סה"כ', value: totalOfAll }
 
     ];
 
     const svg2 = d3.select('#graph');
-    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const margin = { top: 10, right: 10, bottom: 20, left: 30 };
     const width = +svg2.attr('width') - margin.left - margin.right;
     const height = +svg2.attr('height') - margin.top - margin.bottom;
 
@@ -137,7 +157,7 @@
         .attr('y', 6)
         .attr('dy', '0.71em')
         .attr('text-anchor', 'end')
-        .text('Total Sum');
+        .text('עלות הזמנות');
 </script>
 
 <br><br>
