@@ -44,6 +44,12 @@ const username = encodeURIComponent('cocktail');
 const password = encodeURIComponent('1234');
 const database = 'CocktailParty'; // Replace with your desired database name
 
+// Replace with your Facebook Page ID and Access Token
+const pageId = '118027441390101';
+const accessToken = 'EAAEjSpWPHsQBOxKZBscMTp1rxCxUDa4AM0ayapWLcFAxjhw6SyDkNoTxR7A3Bdqf8ZBXJUGfZAkEwwuusvnA4o99pNxLHCY5v0iAMfZC5Lge2PJzaiSyfF1UPOyfPfZAZAqxyuYhe4eC7NejZCtPEODWhPnU3XqZBU9DWTWhFgDtrV1UuA1o1kalpMbC2ZBh8UmEZD';
+
+
+
 const uri = `mongodb+srv://${username}:${password}@cocktailparty.noij63l.mongodb.net/${database}?retryWrites=true&w=majority`;
 
 mongoose
@@ -79,6 +85,7 @@ app.get("/products", async (req, res) => {
   const products = await Product.find({});
   console.log(products);
   res.render("products/index", { products });
+  
 });
 
 app.get("/product/:id", async (req, res) => { //shows the new product after editing/adding a new product
@@ -90,8 +97,37 @@ app.get("/product/:id", async (req, res) => { //shows the new product after edit
 app.post("/products/r", async (req, res) => { // saves the new product from the admin console 
   const newProduct = new Product(req.body);
   await newProduct.save();
-  res.redirect(`/product/${newProduct._id}`);
+
+  const productName = newProduct.name;
+  
+  const postMessage = `שלום חברים נוסף לאתר מוצר חדש !`;
+  
+  const apiEndpoint = `https://graph.facebook.com/${pageId}/feed`;
+  try {
+    const response = await axios.post(apiEndpoint, {
+      message: postMessage,
+      access_token: accessToken,
+    });
+  
+    if (response.status === 200) {
+      const json = { message: 'Posted to Facebook successfully' };
+      res.status(200).json(json);
+    } else {
+      const json = { error: response.data };
+      res.status(response.status).json(json);
+    }
+  } catch (error) {
+    console.error('Error posting to Facebook:', error.response.data);
+    const json = { error: 'An error occurred while posting to Facebook' };
+    res.status(500).json(json);
+  }
+
+  //res.redirect(`/product/${newProduct._id}`);
 });
+
+
+
+
 
 app.get('/products/:id/edit', async (req, res) => { // loads the product from the admin managent console
   try {
@@ -345,6 +381,8 @@ app.get("/orders", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 app.get("/cocktails", async (req, res) => {
   let cocktails = [];
 
