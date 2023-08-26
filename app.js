@@ -66,26 +66,44 @@ mongoose
 //routes
 
 app.get("/", async (req, res) => {
-  const sessionId = req.cookies.sessionId;
-  const username = SESSIONS[sessionId];
+  const q = req.query.q;
+  const sort = req.query.sort;
   const isLoggedIn = !!username; // Check if the username exists in SESSIONS
-
   const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
 
-  const products = await Product.find({});
+  const products = await Product.find({
+    name: { $regex: new RegExp(q, "i") },
+  });
 
-  res.render("products/index", { isLoggedIn , admin , products});
+  if (sort === "price_asc") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (sort === "price_desc") {
+    products.sort((a, b) => b.price - a.price);
+  }
 
+  res.render("products/index", { isLoggedIn, products ,admin});
 });
 
 
 //products
 
 app.get("/products", async (req, res) => {
-  const products = await Product.find({});
-  console.log(products);
-  res.render("products/index", { products });
-  
+  const q = req.query.q;
+  const sort = req.query.sort;
+  const isLoggedIn = !!username; // Check if the username exists in SESSIONS
+  const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
+
+  const products = await Product.find({
+    name: { $regex: new RegExp(q, "i") },
+  });
+
+  if (sort === "price_asc") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (sort === "price_desc") {
+    products.sort((a, b) => b.price - a.price);
+  }
+
+  res.render("products/index", { isLoggedIn, products ,admin});
 });
 
 app.get("/product/:id", async (req, res) => { //shows the new product after editing/adding a new product
@@ -97,8 +115,6 @@ app.get("/product/:id", async (req, res) => { //shows the new product after edit
 app.post("/products/r", async (req, res) => { // saves the new product from the admin console 
   const newProduct = new Product(req.body);
   await newProduct.save();
-
-  const productName = newProduct.name;
   
   const postMessage = `שלום חברים נוסף לאתר מוצר חדש !`;
   
@@ -122,7 +138,6 @@ app.post("/products/r", async (req, res) => { // saves the new product from the 
     res.status(500).json(json);
   }
 
-  //res.redirect(`/product/${newProduct._id}`);
 });
 
 

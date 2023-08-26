@@ -8,8 +8,7 @@
     <meta name="author" content="" />
 
     <title>Cocktail Party !</title>
-    <link rel="icon" href="https://media.istockphoto.com/id/1222730544/vector/cocktail-icon-logo-isolated-on-white-background.jpg?s=170667a&w=0&k=20&c=mLFMIzTUxno3JGVjE_ceV7v67Apd7qPKR5Ot2JVgEvc=">]
-
+    <link rel="icon" href="https://media.istockphoto.com/id/1222730544/vector/cocktail-icon-logo-isolated-on-white-background.jpg?s=170667a&w=0&k=20&c=mLFMIzTUxno3JGVjE_ceV7v67Apd7qPKR5Ot2JVgEvc=">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
@@ -84,6 +83,19 @@
               </a>
             </li>
             <%}%>
+            <li>
+              <form action="/products" method="GET">
+                <div class="input-group">
+                  <div class="form-outline">
+                    <input type="search" id="form1" class="form-control" placeholder="חפש קוקטייל" name="q" />
+                  </div>
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </li>
+
+
           </ul>
         </div>
 
@@ -91,12 +103,38 @@
       </div>
     </nav>
 
-   
-    <!--Products scheme-->
+  
+
+
+
+
+
     <div class="container">
         <div class="row">
           <div class="col-12">
             <h1 class="text-center">הקוקטיילים שלנו</h1>
+          <br>
+                    <div class="row">
+          <!-- Add sorting options -->
+
+          <div class="sort-container text-center">
+            <form id="sortingForm" action="/" method="GET">
+            
+              <select name="sort" id="sortByPrice">
+                <option value="">בחר</option>
+                <option value="price_asc">נמוך לגבוהה</option>
+                <option value="price_desc">גבוהה לנמוך</option>
+              </select>
+              <label for="sortByPrice"> מיון לפי מחיר</label>
+            </form>
+          </div>
+        </div>
+
+
+            </div>
+
+
+
             <div class="row">
               <% products.forEach((product) => { %>
               <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4">
@@ -152,6 +190,8 @@
       </div>
     </div>
     <!--End of Products scheme-->
+
+
     <!-- /.container -->
     <section id="contact">
       <div class="container mt-3">
@@ -250,7 +290,7 @@
 
     <!-- jQuery Version 1.11.1 -->
     <script src="/js/jquery.js"></script>
-
+    <script src="/js/index.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
   </body>
