@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order History</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Order History</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>מספר הזמנה</th>
+          <th>תאריך</th>
+          <th>כמות מוצרים</th>
+          <th>מחיר כולל</th>
+          <th>מייל מזמין</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% for (const order of orders) { %>
+          <tr>
+            <td><a href="/orders/<%= order._id %>"><%= order._id %></a></td>
+            <td><%= order.orderDate %></td>
+            <td><%= order.products[0].quantity %></td>
+            <td><%= order.totalAmount %></td>
+            <td><%= order.userEmail%></td>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+   <!-- jQuery Version 1.11.1 -->
+   <script src="/js/jquery.js"></script>
+
+   <!-- Bootstrap Core JavaScript -->
+   <script src="/js/bootstrap.min.js"></script>
+
+  
+
+</body>
+</html>

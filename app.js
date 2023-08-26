@@ -64,12 +64,23 @@ mongoose
 
 
 //routes
+// Middleware to check if a user is logged in
+const isLoggedInMiddleware = (req, res, next) => {
+  const isLoggedIn = !!req.cookies.userEmail;
+  const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
+  
+  res.locals.isLoggedIn = isLoggedIn; // Make isLoggedIn available in templates
+  res.locals.admin = admin; // Make admin available in templates
+  
+  next();
+};
+
+// Define your routes using the isLoggedInMiddleware
+app.use(isLoggedInMiddleware);
 
 app.get("/", async (req, res) => {
   const q = req.query.q;
   const sort = req.query.sort;
-  const isLoggedIn = !!username; // Check if the username exists in SESSIONS
-  const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
 
   const products = await Product.find({
     name: { $regex: new RegExp(q, "i") },
@@ -81,17 +92,12 @@ app.get("/", async (req, res) => {
     products.sort((a, b) => b.price - a.price);
   }
 
-  res.render("products/index", { isLoggedIn, products ,admin});
+  res.render("products/index", { products });
 });
-
-
-//products
 
 app.get("/products", async (req, res) => {
   const q = req.query.q;
   const sort = req.query.sort;
-  const isLoggedIn = !!username; // Check if the username exists in SESSIONS
-  const admin = req.cookies.adminMode ? req.cookies.adminMode : 0;
 
   const products = await Product.find({
     name: { $regex: new RegExp(q, "i") },
@@ -103,7 +109,7 @@ app.get("/products", async (req, res) => {
     products.sort((a, b) => b.price - a.price);
   }
 
-  res.render("products/index", { isLoggedIn, products ,admin});
+  res.render("products/index", { products });
 });
 
 app.get("/product/:id", async (req, res) => { //shows the new product after editing/adding a new product
@@ -139,9 +145,6 @@ app.post("/products/r", async (req, res) => { // saves the new product from the 
   }
 
 });
-
-
-
 
 
 app.get('/products/:id/edit', async (req, res) => { // loads the product from the admin managent console
@@ -326,10 +329,169 @@ app.get("/admin/hub", async (req, res) => {
 app.get("/admin/add-product", async (req, res) => {
   res.render("admin/new");
 });
+
+app.get("/admin/list-user-orders", async (req, res) => {
+  try {
+    // Fetch orders
+    const orders = await Order.find();
+    console.log(orders);
+    res.render("admin/orders", { orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
  
 app.get("/admin/update-product", async (req, res) => {
   const products = await Product.find({});
   res.render("admin/ProductManagment", { products });
+});
+
+
+app.get('/admin/chart', async (req, res, next) => {
+  try {
+
+    const orders = await Order.find();
+
+      let totalSumOfJanuary = 0;
+      let totalSumOfFebruary = 0;
+      let totalSumOfMarch = 0;
+      let totalSumOfApril = 0;
+      let totalSumOfMay = 0;
+      let totalSumOfJune = 0;
+      let totalSumOfJuly = 0;
+      let totalSumOfAugust = 0;
+      let totalSumOfSeptember = 0;
+      let totalSumOfOctober = 0;
+      let totalSumOfNovember = 0;
+      let totalSumOfDecember = 0;
+      let totalOfAllSofar = 0;
+
+
+      var targetMonth = 0;
+
+      targetMonth = 0;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJanuary += order.totalAmount;
+          }
+      });
+
+      targetMonth = 1;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfFebruary += order.totalAmount;
+          }
+      });
+
+      targetMonth = 2;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfMarch += order.totalAmount;
+          }
+      });
+
+
+      targetMonth = 3;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfApril += order.totalAmount;
+          }
+      });
+
+
+      targetMonth = 4;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfMay += order.totalAmount;
+          }
+      });
+
+
+      targetMonth = 5;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJune += order.totalAmount ;
+          }
+      });
+
+
+      targetMonth = 6;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJuly += order.totalAmount ;
+          }
+      });
+
+      targetMonth = 7;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfAugust += order.totalAmount ;
+          }
+      });
+
+
+      targetMonth = 8;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfSeptember += order.totalAmount;
+          }
+      });
+
+
+      targetMonth = 9;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfOctober += order.totalAmount ;
+          }
+      });
+
+
+      targetMonth = 10;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfNovember += order.totalAmount;
+          }
+      });
+
+
+      targetMonth = 11;
+      orders.forEach((order) => {
+          const orderDate = new Date(order.orderDate);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfDecember += order.totalAmount ;
+          }
+      });
+
+      orders.forEach((order) => {
+          totalOfAllSofar += order.totalAmount ;
+
+      });
+
+
+
+      res.render('admin/chart', {
+          totalSumOfJanuary, totalSumOfFebruary,
+          totalSumOfMarch, totalSumOfApril, totalSumOfMay,
+          totalSumOfJune, totalSumOfJuly,
+          totalSumOfAugust, totalSumOfSeptember, totalSumOfOctober, totalSumOfNovember, totalSumOfDecember,
+          totalOfAllSofar
+      });
+  } catch (error) {
+      console.error('error with orders:', error);
+      res.status(500).render('error');
+  }
 });
 
 
@@ -378,21 +540,43 @@ app.get('/users/logout', (req, res) => {
 })
 
 //orders
+
 app.get("/orders", async (req, res) => {
   // Get the currently logged-in user's email from the authentication mechanism
-  const userEmail = req.cookies.userEmail; // Adjust this to match your authentication setup
+  const userEmail = req.cookies.userEmail; 
 
   try {
     // Fetch orders for the logged-in user
     const orders = await Order.find({ userEmail });
     console.log(orders);
     res.render("users/orders", { orders });
-
-
-
     
   } catch (error) {
     console.error("Error fetching orders:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+app.get("/orders/:id", async (req, res) => {
+  const orderId = req.params.id;
+  const userEmail = req.cookies.userEmail;
+
+  if (!mongoose.Types.ObjectId.isValid(orderId)) {
+    return res.status(400).send("Invalid order ID");
+  }
+
+  try {
+    // Fetch the order with the specified orderId and matching userEmail
+    const order = await Order.findOne({ _id: orderId, userEmail }).populate("products.productId");
+
+    if (!order) {
+      return res.status(404).send("Order not found");
+    }
+
+    res.render("users/orderDetails", { order });
+  } catch (error) {
+    console.error("Error fetching order:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -440,21 +624,7 @@ app.get("/cocktails", async (req, res) => {
 
 
 
-
-
-
-
-
 //setup server
 app.listen(3000, () => {
   console.log("listening on port 3000!");
 });
-
-
-
-
-    // app._router.stack.forEach(function(r){
-    //   if (r.route && r.route.path){
-    //     console.log(r.route.path)
-    //   }
-    // })

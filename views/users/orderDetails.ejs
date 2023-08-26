@@ -1,0 +1,58 @@
+<!-- Assuming you have a layout file that includes common header and footer -->
+
+<!-- Include necessary stylesheets or libraries here -->
+
+<div class="container">
+    <h2>Order Details</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach((product) => { %>
+          <tr>
+            <td class="p-4">
+              <div class="media align-items-center">
+                <img
+                  src="<%= product.productId.picture %>"
+                  class="d-block ui-w-40 ui-bordered mr-4"
+                  alt=""
+                />
+                <div class="media-body">
+                  <a href="#" class="d-block text-dark"><%= product.productId.name %></a>
+                  <b class="text-secondary d-block text-center"><%= product.productId.description %></b>
+                </div>
+              </div>
+            </td>
+            <td class="text-center font-weight-semibold align-middle p-4">
+              <%= product.productId.price %>
+            </td>
+            <td class="align-middle p-4">
+              <input
+                type="text"
+                class="form-control text-center"
+                value="<%= product.quantity %>"
+              />
+            </td>
+            <td class="text-center font-weight-semibold align-middle p-4">
+              <%= product.productId.price * product.quantity %>
+            </td>
+            <td class="text-center align-middle px-0">
+              <a href="/cart/remove/<%= product._id %>" class="shop-tooltip close float-none text-danger" title="Remove" data-original-title="Remove">×</a>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Include necessary scripts here -->
+  
+  <!-- End of layout file -->
+  

@@ -73,12 +73,8 @@
                   <td class="text-center font-weight-semibold align-middle p-4">
                     <%= cartItem.productId.price %>
                   </td>
-                  <td class="align-middle p-4">
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      value="<%= cartItem.quantity %>"
-                    />
+                  <td class="align-middle p-4 text-center">
+                   <%= cartItem.quantity %>
                   </td>
                   <td class="text-center font-weight-semibold align-middle p-4">
                     <%= cartItem.productId.price * cartItem.quantity %>
