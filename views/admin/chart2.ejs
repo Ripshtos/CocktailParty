@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>גרף הזמנות</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    #container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 50px; 
+    }
+    .upperP {
+      font-size: 30px; 
+    }
+    .bar {
+    fill: #6f058f; 
+  }
+  </style>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <h1>גרף ימי הולדת לפי חודש</h1>
+    <p class="upperP">כמות המשתמשים הכוללת באתר הוא:<%= totalOfAllSofar %></p>
+    <div id="graph-bar"></div>
+    <svg id="graph" width="850" height="400"></svg>
+    <div
+      id="graph-container"
+      data-totalSumOfJanuary="<%= totalSumOfJanuary %>"
+      data-totalSumOfFebruary="<%= totalSumOfFebruary %>"
+      data-totalSumOfMarch="<%= totalSumOfMarch %>"
+      data-totalSumOfApril="<%= totalSumOfApril %>"
+      data-totalSumOfMay="<%= totalSumOfMay %>"
+      data-totalSumOfJune="<%= totalSumOfJune %>"
+      data-totalSumOfJuly="<%= totalSumOfJuly %>"
+      data-totalSumOfAugust="<%= totalSumOfAugust %>"
+      data-totalSumOfSeptember="<%= totalSumOfSeptember %>"
+      data-totalSumOfOctober="<%= totalSumOfOctober %>"
+      data-totalSumOfNovember="<%= totalSumOfNovember %>"
+      data-totalSumOfDecember="<%= totalSumOfDecember %>"
+    ></div>
+    <br /><br />
+  </div>
+
+
+<script>
+
+    const totalSum1 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfJanuary'));
+    const totalSum2 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfFebruary'));
+    const totalSum3 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfMarch'));
+    const totalSum4 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfApril'));
+    const totalSum5 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfMay'));
+    const totalSum6 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfJune'));
+    const totalSum7 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfJuly'));
+    const totalSum8 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfAugust'));
+    const totalSum9 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfSeptember'));
+    const totalSum10 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfOctober'));
+    const totalSum11 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfNovember'));
+    const totalSum12 = parseFloat(document.getElementById('graph-container').getAttribute('data-totalSumOfDecember'));
+
+    const totalOfAll = totalSum1 + totalSum2 + totalSum3 + totalSum4 + totalSum5 + totalSum6 + totalSum7 +
+        totalSum8 + totalSum9 + totalSum10 + totalSum11 + totalSum12;
+
+    const maxSum = totalOfAll;
+    const progressPercentage1 = (totalSum1 / maxSum) * 100;
+    const progressPercentage2 = (totalSum2 / maxSum) * 100;
+    const progressPercentage3 = (totalSum3 / maxSum) * 100;
+    const progressPercentage4 = (totalSum4 / maxSum) * 100;
+    const progressPercentage5 = (totalSum5 / maxSum) * 100;
+    const progressPercentage6 = (totalSum6 / maxSum) * 100;
+    const progressPercentage7 = (totalSum7 / maxSum) * 100;
+    const progressPercentage8 = (totalSum8 / maxSum) * 100;
+    const progressPercentage9 = (totalSum9 / maxSum) * 100;
+    const progressPercentage10 = (totalSum10 / maxSum) * 100;
+    const progressPercentage11 = (totalSum11 / maxSum) * 100;
+    const progressPercentage12 = (totalSum12 / maxSum) * 100;
+    const progressPercentageOfAll = (totalOfAll / maxSum) * 100;
+
+
+    document.getElementById('graph-bar').style.width = progressPercentage1 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage2 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage3 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage4 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage5 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage6 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage7 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage8 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage9 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage10 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage11 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentage12 + '%';
+    document.getElementById('graph-bar').style.width = progressPercentageOfAll + '%';
+
+
+    const data = [
+        { name: 'ינואר', value: totalSum1 },
+        { name: 'פברואר', value: totalSum2 },
+        { name: 'מרץ', value: totalSum3 },
+        { name: 'אפריל', value: totalSum4 },
+        { name: 'מאי', value: totalSum5 },
+        { name: 'יוני', value: totalSum6 },
+        { name: 'יולי', value: totalSum7 },
+        { name: 'אוגוסט', value: totalSum8 },
+        { name: 'ספטמבר', value: totalSum9 },
+        { name: 'אוקטובר', value: totalSum10 },
+        { name: 'נובמבר', value: totalSum11 },
+        { name: 'דצמבר', value: totalSum12 },
+
+        { name: 'סה"כ', value: totalOfAll }
+
+    ];
+
+    const svg2 = d3.select('#graph');
+    const margin = { top: 10, right: 10, bottom: 20, left: 30 };
+    const width = +svg2.attr('width') - margin.left - margin.right;
+    const height = +svg2.attr('height') - margin.top - margin.bottom;
+
+    const x = d3.scaleBand()
+        .rangeRound([0, width])
+        .padding(0.1);
+
+    const y = d3.scaleLinear()
+        .rangeRound([height, 0]);
+
+    const g = svg2.append('g')
+        .attr('transform', `translate(${margin.left + 15},${margin.top})`);
+
+    x.domain(data.map(d => d.name));
+    y.domain([0, d3.max(data, d => d.value)]);
+
+    g.selectAll('.bar')
+        .data(data)
+        .enter().append('rect')
+        .attr('class', 'bar')
+        .attr('x', d => x(d.name))
+        .attr('y', d => y(d.value))
+        .attr('width', x.bandwidth())
+        .attr('height', d => height - y(d.value));
+
+    g.append('g')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(x));
+
+    g.append('g')
+        .call(d3.axisLeft(y))
+        .append('text')
+        .attr('fill', '#000')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 6)
+        .attr('dy', '0.71em')
+        .attr('text-anchor', 'end')
+        .text('כמות משתמשים');
+</script>
+
+<br><br>
+
+
+</body>
+</html>

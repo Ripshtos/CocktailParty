@@ -132,7 +132,7 @@ app.post("/products/r", async (req, res) => { // saves the new product from the 
   
     if (response.status === 200) {
       const json = { message: 'Posted to Facebook successfully' };
-      res.status(200).json(json);
+      res.render('products/show', {newProduct} )
     } else {
       const json = { error: response.data };
       res.status(response.status).json(json);
@@ -481,6 +481,153 @@ app.get('/admin/chart', async (req, res, next) => {
 
 
       res.render('admin/chart', {
+          totalSumOfJanuary, totalSumOfFebruary,
+          totalSumOfMarch, totalSumOfApril, totalSumOfMay,
+          totalSumOfJune, totalSumOfJuly,
+          totalSumOfAugust, totalSumOfSeptember, totalSumOfOctober, totalSumOfNovember, totalSumOfDecember,
+          totalOfAllSofar
+      });
+  } catch (error) {
+      console.error('error with orders:', error);
+      res.status(500).render('error');
+  }
+});
+
+
+app.get('/admin/chart2', async (req, res, next) => {
+  try {
+
+    const users = await User.find();
+
+      let totalSumOfJanuary = 0;
+      let totalSumOfFebruary = 0;
+      let totalSumOfMarch = 0;
+      let totalSumOfApril = 0;
+      let totalSumOfMay = 0;
+      let totalSumOfJune = 0;
+      let totalSumOfJuly = 0;
+      let totalSumOfAugust = 0;
+      let totalSumOfSeptember = 0;
+      let totalSumOfOctober = 0;
+      let totalSumOfNovember = 0;
+      let totalSumOfDecember = 0;
+      let totalOfAllSofar = 0;
+
+
+      var targetMonth = 0;
+
+      targetMonth = 0;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJanuary += 1;
+          }
+      });
+
+      targetMonth = 1;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfFebruary += 1;
+          }
+      });
+
+      targetMonth = 2;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfMarch += 1 ;
+          }
+      });
+
+
+      targetMonth = 3;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfApril += 1;
+          }
+      });
+
+
+      targetMonth = 4;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfMay += 1;
+          }
+      });
+
+
+      targetMonth = 5;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJune += 1 ;
+          }
+      });
+
+
+      targetMonth = 6;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfJuly += 1 ;
+          }
+      });
+
+      targetMonth = 7;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfAugust += 1 ;
+          }
+      });
+
+
+      targetMonth = 8;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfSeptember += 1;
+          }
+      });
+
+
+      targetMonth = 9;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfOctober += 1 ;
+          }
+      });
+
+
+      targetMonth = 10;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfNovember += 1;
+          }
+      });
+
+
+      targetMonth = 11;
+      users.forEach((user) => {
+          const orderDate = new Date(user.birthday);
+          if (orderDate.getMonth() === targetMonth) {
+              totalSumOfDecember += 1 ;
+          }
+      });
+
+      users.forEach((user) => {
+          totalOfAllSofar++ ;
+
+      });
+
+
+
+      res.render('admin/chart2', {
           totalSumOfJanuary, totalSumOfFebruary,
           totalSumOfMarch, totalSumOfApril, totalSumOfMay,
           totalSumOfJune, totalSumOfJuly,
