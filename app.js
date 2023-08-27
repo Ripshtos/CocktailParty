@@ -18,6 +18,7 @@ const cookieParser = require('cookie-parser');
 //set view engine to ejs
 app.set('view engine', 'ejs');
 app.use(cookieParser()); // initializing the lib
+
 //set upp public directory to serve static files
 app.use(express.static('public'));
 
@@ -43,7 +44,7 @@ const username = encodeURIComponent('cocktail');
 const password = encodeURIComponent('1234');
 const database = 'CocktailParty'; // Replace with your desired database name
 
-// Replace with your Facebook Page ID and Access Token
+// facebook
 const pageId = '118027441390101';
 const accessToken = 'EAAEjSpWPHsQBOxKZBscMTp1rxCxUDa4AM0ayapWLcFAxjhw6SyDkNoTxR7A3Bdqf8ZBXJUGfZAkEwwuusvnA4o99pNxLHCY5v0iAMfZC5Lge2PJzaiSyfF1UPOyfPfZAZAqxyuYhe4eC7NejZCtPEODWhPnU3XqZBU9DWTWhFgDtrV1UuA1o1kalpMbC2ZBh8UmEZD';
 
@@ -346,7 +347,7 @@ app.get("/admin/update-product", async (req, res) => {
   res.render("admin/ProductManagment", { products });
 });
 
-
+//charts 
 app.get('/admin/chart', async (req, res, next) => {
   try {
 
@@ -694,7 +695,6 @@ app.get("/orders", async (req, res) => {
   try {
     // Fetch orders for the logged-in user
     const orders = await Order.find({ userEmail });
-    console.log(orders);
     res.render("users/orders", { orders });
     
   } catch (error) {
